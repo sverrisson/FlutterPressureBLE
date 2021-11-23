@@ -1,0 +1,6 @@
+{
+  "appTitle": "ble_pressure",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
