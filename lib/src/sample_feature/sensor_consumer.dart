@@ -14,19 +14,6 @@ class SensorConsumerView extends StatefulWidget {
 }
 
 class _SensorConsumerViewState extends State<SensorConsumerView> {
-  // List<ScanResult> devices = [];
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   BleManager.instance.scanDevices().then((result) {
-  //     setState(() {
-  //       devices = result;
-  //       print("Got devices ${devices}");
-  //     });
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<BleStateModel>(
@@ -34,7 +21,7 @@ class _SensorConsumerViewState extends State<SensorConsumerView> {
         if (ble.devices.isEmpty) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Select Device'),
+              title: const Text('Find Device'),
               actions: [
                 IconButton(
                   icon: Icon(
@@ -57,30 +44,32 @@ class _SensorConsumerViewState extends State<SensorConsumerView> {
                 ),
               ],
             ),
-            body: Stack(
-              alignment: Alignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    if (ble.status == BleStatus.unknown ||
-                        ble.status == BleStatus.idle) {
-                      if (ble.devices.isEmpty) {
-                        ble.scan();
+            body: Center(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      if (ble.status == BleStatus.unknown ||
+                          ble.status == BleStatus.idle) {
+                        if (ble.devices.isEmpty) {
+                          ble.scan();
+                        }
+                      } else {
+                        if (ble.status != BleStatus.idle) {
+                          ble.stop();
+                        }
                       }
-                    } else {
-                      if (ble.status != BleStatus.idle) {
-                        ble.stop();
-                      }
-                    }
-                  },
-                  child: (ble.status != BleStatus.scanning)
-                      ? const Text('Start Scanning')
-                      : const Text('Stop'),
-                ),
-                CupertinoActivityIndicator(
-                  animating: ble.status == BleStatus.scanning,
-                ),
-              ],
+                    },
+                    child: (ble.status != BleStatus.scanning)
+                        ? const Text('Start Scanning')
+                        : const Text('Stop'),
+                  ),
+                  (ble.status == BleStatus.scanning)
+                      ? const CircularProgressIndicator()
+                      : Container(),
+                ],
+              ),
             ),
           );
         } else {

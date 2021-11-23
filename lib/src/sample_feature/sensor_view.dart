@@ -4,28 +4,70 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:provider/provider.dart';
 
 /// Displays detailed information about a SampleItem.
-class SensorView extends StatelessWidget {
-  SensorView({Key? key}) : super(key: key);
+class SensorView extends StatefulWidget {
+  const SensorView({Key? key}) : super(key: key);
 
   static const routeName = '/sample_item';
 
-// Provider.of<CartModel>(context, listen: false).removeAll();
+  @override
+  _SensorViewState createState() => _SensorViewState();
+}
+
+class _SensorViewState extends State<SensorView> {
+  String services = "";
+
+  @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
+    fn();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // var id = DeviceIdentifier(deviceIdentifier ?? "");
-    // var device = BleManager.instance.peripherals
-    //     .firstWhere((device) => device.device.id == id);
+    ScanResult? device =
+        Provider.of<BleStateModel>(context, listen: true).selected;
+
     return Consumer<BleStateModel>(
       builder: (context, ble, child) {
-        AdvertisementData data =
-            ble.devices[ble.selected ?? 0].advertisementData;
+        AdvertisementData? data = device?.advertisementData;
         return Scaffold(
           appBar: AppBar(
-            title: Text(data.localName),
+            title: Text(data?.localName ?? 'Nothing Selected'),
           ),
           body: Center(
-            child: Text(data.serviceUuids.toString()),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    data?.localName ?? 'Nothing Selected',
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  Text(
+                    data?.serviceUuids.toString() ?? 'Unknown',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: TextButton(
+                        onPressed: () async {
+                          await ble.connect(device?.device);
+                          ble
+                              .services(device?.device)
+                              .then((value) => setState(() {
+                                    services = value;
+                                  }));
+                        },
+                        child: const Text('Show Services'),
+                      ),
+                    ),
+                  ),
+                  Text(services),
+                ],
+              ),
+            ),
           ),
         );
       },

@@ -1,5 +1,7 @@
+import 'package:ble_pressure/src/ble/ble_state_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:provider/provider.dart';
 import '../settings/settings_view.dart';
 import 'sensor_view.dart';
 
@@ -43,23 +45,23 @@ class SensorListView extends StatelessWidget {
           final device = devices[index];
 
           return ListTile(
-              title: Text('Device: ${device.advertisementData.localName}'),
-              leading: const CircleAvatar(
-                // Display the Flutter Logo image asset.
-                foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-              ),
-              onTap: () {
-                // Navigate to the details page. If the user leaves and returns to
-                // the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(
-                  context,
-                  SensorView.routeName,
-                  arguments: <String, String>{
-                    'deviceIdentifier': device.device.id.toString(),
-                  },
-                );
-              });
+            title: Text('Device: ${device.advertisementData.localName}'),
+            leading: const CircleAvatar(
+              // Display the Flutter Logo image asset.
+              foregroundImage: AssetImage('assets/images/flutter_logo.png'),
+            ),
+            onTap: () {
+              Provider.of<BleStateModel>(context, listen: false)
+                  .selectDevice(device);
+              // Navigate to the details page. If the user leaves and returns to
+              // the app after it has been killed while running in the
+              // background, the navigation stack is restored.
+              Navigator.restorablePushNamed(
+                context,
+                SensorView.routeName,
+              );
+            },
+          );
         },
       ),
     );

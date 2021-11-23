@@ -15,6 +15,13 @@ class MyApp extends StatelessWidget {
 
   final SettingsController settingsController;
 
+  static const globalTextTheme = TextTheme(
+    headline1: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
+    subtitle1: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+    caption: TextStyle(fontSize: 15.0, fontFamily: 'Garamond'),
+    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+  );
+
   @override
   Widget build(BuildContext context) {
     // Glue the SettingsController to the MaterialApp.
@@ -55,7 +62,9 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
+          theme: ThemeData(
+            textTheme: globalTextTheme,
+          ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
@@ -69,7 +78,7 @@ class MyApp extends StatelessWidget {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
                   case SensorView.routeName:
-                    return SensorView();
+                    return const SensorView();
                   case SensorConsumerView.routeName:
                   default:
                     return const SensorConsumerView();
