@@ -53,7 +53,8 @@ class _SensorConsumerViewState extends State<SensorConsumerView> {
                       if (ble.status == BleStatus.unknown ||
                           ble.status == BleStatus.idle) {
                         if (ble.devices.isEmpty) {
-                          ble.scan();
+                          ble.scan(
+                              serviceUuids: BleStateModel.findServiceUuids);
                         }
                       } else {
                         if (ble.status != BleStatus.idle) {
@@ -62,7 +63,7 @@ class _SensorConsumerViewState extends State<SensorConsumerView> {
                       }
                     },
                     child: (ble.status != BleStatus.scanning)
-                        ? const Text('Start Scanning')
+                        ? const Text('Scan for Pressure-BJ')
                         : const Text('Stop'),
                   ),
                   (ble.status == BleStatus.scanning)

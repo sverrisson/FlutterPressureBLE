@@ -55,7 +55,7 @@ class _SensorViewState extends State<SensorView> {
                         onPressed: () async {
                           await ble.connect(device?.device);
                           ble
-                              .services(device?.device)
+                              .readServices(device?.device)
                               .then((value) => setState(() {
                                     services = value;
                                   }));
