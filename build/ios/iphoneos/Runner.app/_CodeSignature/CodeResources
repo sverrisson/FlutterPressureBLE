@@ -110,7 +110,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		JGP0jdR2NRzP+v1xvqzaedxXuN4=
+		c/V8WqeISb903E4GfJMdVn0Qhho=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -254,7 +254,7 @@
 		</data>
 		<key>Frameworks/flutter_blue.framework/flutter_blue</key>
 		<data>
-		EtxJH2VUobGCeNGSK8o8ps3Ot3Y=
+		77M3+0AyLl9x8+ihWIXfgVDNB6k=
 		</data>
 		<key>Frameworks/libswiftCore.dylib</key>
 		<data>
@@ -322,7 +322,7 @@
 		</data>
 		<key>Frameworks/protobuf.framework/protobuf</key>
 		<data>
-		QZqyXjhMSz3AX4kYuuqiUk7s9Yk=
+		kox3GlFXCTF8XJld8uf4DrjxqMw=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -629,11 +629,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JGP0jdR2NRzP+v1xvqzaedxXuN4=
+			c/V8WqeISb903E4GfJMdVn0Qhho=
 			</data>
 			<key>hash2</key>
 			<data>
-			mcF9iezoKYL2t02i1egQVzUc+O0pc8DkQnQx+gcHYTY=
+			vAtbOCuuImDciTewA9VLtTwd0PKqX0DmdsK6GdY7xRY=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -1025,11 +1025,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			EtxJH2VUobGCeNGSK8o8ps3Ot3Y=
+			77M3+0AyLl9x8+ihWIXfgVDNB6k=
 			</data>
 			<key>hash2</key>
 			<data>
-			jqdTNfSANDu2jR2UV0PVo07Vpw6cahYeioWiuvZqZIc=
+			Eda4c/7TSnFQ+Ql2VvbUb8V0Au9k7AE4icQIbbuYVwo=
 			</data>
 		</dict>
 		<key>Frameworks/libswiftCore.dylib</key>
@@ -1212,11 +1212,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QZqyXjhMSz3AX4kYuuqiUk7s9Yk=
+			kox3GlFXCTF8XJld8uf4DrjxqMw=
 			</data>
 			<key>hash2</key>
 			<data>
-			GGNFsn9R8qTdyDaBMhWjOkA0wRe0OS/994sgb0t0jCQ=
+			qVUOYDBporzekf0Of7yyXFNSt3kNIETc0x8aE5ybofU=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
