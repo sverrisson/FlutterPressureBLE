@@ -48,7 +48,7 @@ class _SensorConsumerViewState extends State<SensorConsumerView> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () {
                       if (ble.status == BleStatus.unknown ||
                           ble.status == BleStatus.idle) {

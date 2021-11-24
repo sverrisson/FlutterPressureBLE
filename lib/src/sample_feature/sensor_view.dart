@@ -51,7 +51,7 @@ class _SensorViewState extends State<SensorView> {
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Center(
-                      child: TextButton(
+                      child: ElevatedButton(
                         onPressed: () async {
                           await ble.connect(device?.device);
                           ble
