@@ -1,4 +1,5 @@
 import 'package:ble_pressure/src/ble/ble_state_model.dart';
+import 'package:ble_pressure/src/sample_feature/services_consumer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:provider/provider.dart';
@@ -54,13 +55,19 @@ class _SensorViewState extends State<SensorView> {
                       child: ElevatedButton(
                         onPressed: () async {
                           await ble.connect(device?.device);
-                          ble
-                              .readServices(device?.device)
-                              .then((value) => setState(() {
-                                    services = value.toString();
-                                  }));
+                          ble.readServices(device?.device).then(
+                            (value) {
+                              setState(() {
+                                services = value.toString();
+                                Navigator.restorablePushNamed(
+                                  context,
+                                  ServicesConsumer.routeName,
+                                );
+                              });
+                            },
+                          );
                         },
-                        child: const Text('Show Services'),
+                        child: const Text('Scan Services'),
                       ),
                     ),
                   ),
