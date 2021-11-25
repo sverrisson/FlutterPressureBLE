@@ -7,9 +7,9 @@ import 'sensor_view.dart';
 
 /// Displays a list of SampleItems.
 class SensorListView extends StatelessWidget {
-  const SensorListView({Key? key, this.devices = const []}) : super(key: key);
+  const SensorListView({Key? key, this.scanned = const []}) : super(key: key);
 
-  final List<ScanResult> devices;
+  final List<ScanResult> scanned;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,9 @@ class SensorListView extends StatelessWidget {
         // scroll position when a user leaves and returns to the app after it
         // has been killed while running in the background.
         restorationId: 'sampleItemListView',
-        itemCount: devices.length,
+        itemCount: scanned.length,
         itemBuilder: (BuildContext context, int index) {
-          final device = devices[index];
+          final device = scanned[index];
 
           return ListTile(
             title: Text('Device: ${device.advertisementData.localName}'),

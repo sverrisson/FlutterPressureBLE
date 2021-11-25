@@ -57,7 +57,7 @@ class _SensorViewState extends State<SensorView> {
                           ble
                               .readServices(device?.device)
                               .then((value) => setState(() {
-                                    services = value;
+                                    services = value.toString();
                                   }));
                         },
                         child: const Text('Show Services'),
