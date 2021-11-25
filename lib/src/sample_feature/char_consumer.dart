@@ -1,5 +1,4 @@
 import 'package:ble_pressure/src/ble/ble_state_model.dart';
-import 'package:ble_pressure/src/sample_feature/services_list_view.dart';
 import 'package:ble_pressure/src/settings/settings_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

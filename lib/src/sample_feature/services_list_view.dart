@@ -34,7 +34,6 @@ class ServicesListView extends StatelessWidget {
         itemCount: services.length,
         itemBuilder: (BuildContext context, int index) {
           final service = services[index];
-
           return ListTile(
             title: Text('Service: ${service.uuid}'),
             leading: const Icon(
