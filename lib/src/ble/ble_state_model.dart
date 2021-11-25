@@ -32,14 +32,13 @@ class BleStateModel extends ChangeNotifier {
   List<BluetoothService> get services => _services;
   List<BluetoothCharacteristic> get characteristics => _chars;
 
-  Future<String> readData(BluetoothCharacteristic? char) async {
-    if (char == null) return "";
-    String string = "";
-    char.read().then((value) {
-      string = utf8.decode(value, allowMalformed: true);
+  Stream<String> readData(BluetoothCharacteristic? char) {
+    if (char == null) return const Stream<String>.empty();
+    return char.read().asStream().map((values) {
+      String string = utf8.decode(values, allowMalformed: true);
       log.info("☢️ Data read: $string");
+      return string;
     });
-    return string;
   }
 
   Future<void> writeInt(BluetoothCharacteristic? char, int value) async {
@@ -87,7 +86,7 @@ class BleStateModel extends ChangeNotifier {
     log.info("☢️ Services for device: ${device.name}");
     final services = await device.discoverServices();
     for (var service in services) {
-      log.info("☢️ $service.uuid");
+      log.info("☢️ ${service.uuid}");
     }
     _services = services;
     return services;
@@ -97,9 +96,9 @@ class BleStateModel extends ChangeNotifier {
   Future<List<BluetoothCharacteristic>> readCharacteristics(
       BluetoothService service) async {
     final chars = service.characteristics;
-    log.info("☢️ Chars for service: $service.uuid");
+    log.info("☢️ Chars for service: ${service.uuid}");
     for (var char in chars) {
-      log.info("☢️ $char.uuid");
+      log.info("☢️ ${char.uuid}");
     }
     _chars = chars;
     return chars;

@@ -26,7 +26,7 @@ class _SensorViewState extends State<SensorView> {
   @override
   Widget build(BuildContext context) {
     ScanResult? device =
-        Provider.of<BleStateModel>(context, listen: true).selected;
+        Provider.of<BleStateModel>(context, listen: false).selected;
 
     return Consumer<BleStateModel>(
       builder: (context, ble, child) {
