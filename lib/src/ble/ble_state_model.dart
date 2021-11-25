@@ -8,7 +8,6 @@ enum BleStatus { unknown, scanning, idle, unavailable }
 class BleStateModel extends ChangeNotifier {
   /// Internal, private state
   List<ScanResult> _scanResults = [];
-  List<BluetoothDevice> _devices = [];
   int? _index;
   BleStatus _status = BleStatus.unknown;
   List<BluetoothService> _services = [];
@@ -21,7 +20,6 @@ class BleStateModel extends ChangeNotifier {
 
   /// List of scanned devices
   List<ScanResult> get scanned => _scanResults;
-  List<BluetoothDevice> get devices => _devices;
 
   /// Current selected device.
   ScanResult? get selected => (_index != null) ? _scanResults[_index!] : null;
@@ -151,7 +149,6 @@ class BleStateModel extends ChangeNotifier {
     log.info("☢️ Clear Devices");
     _index = null;
     _scanResults.clear();
-    _devices.clear();
     _status = BleStatus.unknown;
     // This call tells the widgets that are listening to this model to rebuild.
     notifyListeners();
