@@ -5,16 +5,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ServicesConsumer extends StatefulWidget {
-  const ServicesConsumer({Key? key}) : super(key: key);
+class CharConsumer extends StatefulWidget {
+  const CharConsumer({Key? key}) : super(key: key);
 
-  static const routeName = '/services';
+  static const routeName = '/chars';
 
   @override
-  _ServicesConsumerState createState() => _ServicesConsumerState();
+  _CharConsumerState createState() => _CharConsumerState();
 }
 
-class _ServicesConsumerState extends State<ServicesConsumer> {
+class _CharConsumerState extends State<CharConsumer> {
   @override
   Widget build(BuildContext context) {
     return Consumer<BleStateModel>(
@@ -22,8 +22,7 @@ class _ServicesConsumerState extends State<ServicesConsumer> {
         if (ble.services.isEmpty) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(
-                  '${Provider.of<BleStateModel>(context, listen: false).selected?.device.name}'),
+              title: const Text('Find Device'),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.settings),

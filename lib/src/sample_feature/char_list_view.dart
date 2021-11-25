@@ -1,21 +1,22 @@
 import 'package:ble_pressure/src/ble/ble_state_model.dart';
+import 'package:ble_pressure/src/settings/settings_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:provider/provider.dart';
-import '../settings/settings_view.dart';
-import 'sensor_view.dart';
 
-/// Displays a list of SampleItems.
-class SensorListView extends StatelessWidget {
-  const SensorListView({Key? key, this.scanned = const []}) : super(key: key);
+/// Displays a list of Characteristics.
+class CharListView extends StatelessWidget {
+  const CharListView({Key? key, this.services = const []}) : super(key: key);
 
-  final List<ScanResult> scanned;
+  final List<BluetoothService> services;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select Device'),
+        title: Text(
+            '${Provider.of<BleStateModel>(context, listen: false).selected?.device.name}'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -23,33 +24,28 @@ class SensorListView extends StatelessWidget {
               Navigator.restorablePushNamed(context, SettingsView.routeName);
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.delete_outline),
-            onPressed: () {
-              Provider.of<BleStateModel>(context, listen: false).removeAll();
-            },
-          ),
         ],
       ),
       body: ListView.builder(
         restorationId: 'sampleItemListView',
-        itemCount: scanned.length,
+        itemCount: services.length,
         itemBuilder: (BuildContext context, int index) {
-          final device = scanned[index];
+          final service = services[index];
+
           return ListTile(
-            title: Text('Device: ${device.advertisementData.localName}'),
+            title: Text('Service: ${service.uuid}'),
             leading: const Icon(
               Icons.bluetooth_connected,
-              size: 32,
+              size: 36,
               color: Colors.blueAccent,
             ),
             onTap: () {
               Provider.of<BleStateModel>(context, listen: false)
-                  .selectDevice(device);
-              Navigator.restorablePushNamed(
-                context,
-                SensorView.routeName,
-              );
+                  .readCharacteristics(service);
+              // Navigator.restorablePushNamed(
+              //   context,
+              //   //ServicesListView().routeName,
+              // );
             },
           );
         },

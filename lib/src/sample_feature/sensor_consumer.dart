@@ -66,7 +66,11 @@ class _SensorConsumerViewState extends State<SensorConsumerView> {
                         if (ble.status == BleStatus.unknown ||
                             ble.status == BleStatus.idle) {
                           if (ble.devices.isEmpty) {
-                            ble.scan().then((value) => setState(() {}));
+                            ble
+                                .scan(
+                                  serviceUuids: BleStateModel.findServiceUuids,
+                                )
+                                .then((value) => setState(() {}));
                           }
                         } else {
                           if (ble.status != BleStatus.idle) {
