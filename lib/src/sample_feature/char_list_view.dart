@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 
 /// Displays a list of Characteristics.
 class CharListView extends StatelessWidget {
-  const CharListView({Key? key, this.services = const []}) : super(key: key);
+  const CharListView({Key? key, this.chars = const []}) : super(key: key);
 
-  final List<BluetoothService> services;
+  final List<BluetoothCharacteristic> chars;
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +27,20 @@ class CharListView extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        restorationId: 'sampleItemListView',
-        itemCount: services.length,
+        restorationId: 'charListView',
+        itemCount: chars.length,
         itemBuilder: (BuildContext context, int index) {
-          final service = services[index];
+          final char = chars[index];
 
           return ListTile(
-            title: Text('Service: ${service.uuid}'),
+            title: Text('Char: ${char.uuid}'),
             leading: const Icon(
               Icons.bluetooth_connected,
               size: 36,
               color: Colors.blueAccent,
             ),
             onTap: () {
-              Provider.of<BleStateModel>(context, listen: false)
-                  .readCharacteristics(service);
-              // Navigator.restorablePushNamed(
-              //   context,
-              //   //ServicesListView().routeName,
-              // );
+              Provider.of<BleStateModel>(context, listen: false).readData(char);
             },
           );
         },

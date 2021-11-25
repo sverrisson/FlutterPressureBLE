@@ -32,7 +32,7 @@ class SensorListView extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        restorationId: 'sampleItemListView',
+        restorationId: 'sensorListView',
         itemCount: scanned.length,
         itemBuilder: (BuildContext context, int index) {
           final device = scanned[index];

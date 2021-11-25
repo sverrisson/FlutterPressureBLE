@@ -30,7 +30,7 @@ class ServicesListView extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        restorationId: 'sampleItemListView',
+        restorationId: 'servicesListView',
         itemCount: services.length,
         itemBuilder: (BuildContext context, int index) {
           final service = services[index];

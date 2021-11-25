@@ -101,6 +101,7 @@ class BleStateModel extends ChangeNotifier {
     for (var char in chars) {
       log.info("☢️ $char.uuid");
     }
+    _chars = chars;
     return chars;
   }
 

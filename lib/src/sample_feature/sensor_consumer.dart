@@ -22,7 +22,7 @@ class _SensorConsumerViewState extends State<SensorConsumerView> {
         if (ble.scanned.isEmpty) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Find Device'),
+              title: const Text('Getting Services'),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.settings),

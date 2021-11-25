@@ -1,3 +1,4 @@
+import 'package:ble_pressure/src/sample_feature/char_consumer.dart';
 import 'package:ble_pressure/src/sample_feature/services_consumer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -82,6 +83,8 @@ class MyApp extends StatelessWidget {
                     return const SensorView();
                   case ServicesConsumer.routeName:
                     return const ServicesConsumer();
+                  case CharConsumer.routeName:
+                    return const CharConsumer();
                   case SensorConsumerView.routeName:
                   default:
                     return const SensorConsumerView();

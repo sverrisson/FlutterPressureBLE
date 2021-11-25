@@ -58,7 +58,6 @@ class _SensorViewState extends State<SensorView> {
                           ble.readServices(device?.device).then(
                             (value) {
                               setState(() {
-                                services = value.toString();
                                 Navigator.restorablePushNamed(
                                   context,
                                   ServicesConsumer.routeName,
