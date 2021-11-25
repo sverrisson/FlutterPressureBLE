@@ -1,1 +1,0 @@
- /Users/sverrisson/Developer/FlutterPressureBLE/.dart_tool/flutter_gen/gen_l10n/app_localizations_en.dart /Users/sverrisson/Developer/FlutterPressureBLE/.dart_tool/flutter_gen/gen_l10n/app_localizations.dart:  /Users/sverrisson/Developer/FlutterPressureBLE/l10n.yaml /Users/sverrisson/Developer/FlutterPressureBLE/lib/src/localization/app_en.arb
