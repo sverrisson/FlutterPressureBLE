@@ -17,7 +17,7 @@ class CharListView extends StatefulWidget {
 }
 
 class _CharListViewState extends State<CharListView> {
-  String _value = '';
+  final Map<int, String> _map = {};
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _CharListViewState extends State<CharListView> {
           final char = widget.chars[index];
           return ListTile(
             title: Text('Char: ${char.uuid.toString().substring(6, 8)}'),
-            subtitle: Text(_value),
+            subtitle: Text(_map[index] ?? ''),
             leading: const Icon(
               Icons.bluetooth_connected,
               size: 36,
@@ -56,11 +56,14 @@ class _CharListViewState extends State<CharListView> {
                   Fluttertoast.showToast(
                       msg: value,
                       toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.TOP,
+                      gravity: ToastGravity.BOTTOM,
                       timeInSecForIosWeb: 1,
                       backgroundColor: Colors.deepOrange,
                       textColor: Colors.white,
                       fontSize: 16.0);
+                  setState(() {
+                    _map[index] = value;
+                  });
                 },
               );
             },

@@ -40,7 +40,7 @@ class _SensorConsumerViewState extends State<SensorConsumerView> {
                   onPressed: () {
                     if (ble.status == BleStatus.unknown ||
                         ble.status == BleStatus.idle) {
-                      if (ble.devices.isEmpty) {
+                      if (ble.scanned.isEmpty) {
                         ble.scan();
                       }
                     } else {
@@ -62,7 +62,7 @@ class _SensorConsumerViewState extends State<SensorConsumerView> {
                       onPressed: () {
                         if (ble.status == BleStatus.unknown ||
                             ble.status == BleStatus.idle) {
-                          if (ble.devices.isEmpty) {
+                          if (ble.scanned.isEmpty) {
                             ble
                                 .scan(
                                   serviceUuids: BleStateModel.findServiceUuids,
