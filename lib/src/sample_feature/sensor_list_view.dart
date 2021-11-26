@@ -45,7 +45,7 @@ class SensorListView extends StatelessWidget {
             ),
             onTap: () {
               Provider.of<BleStateModel>(context, listen: false)
-                  .selectDevice(device);
+                  .selectScanResult(device);
               Navigator.restorablePushNamed(
                 context,
                 SensorView.routeName,
