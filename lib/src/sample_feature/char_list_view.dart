@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:collection/collection.dart';
 
 /// Displays a list of Characteristics.
 class CharListView extends StatefulWidget {
@@ -18,6 +19,18 @@ class CharListView extends StatefulWidget {
 
 class _CharListViewState extends State<CharListView> {
   final Map<int, String> _map = {};
+
+  @override
+  void initState() {
+    super.initState();
+    final ble = Provider.of<BleStateModel>(context, listen: false);
+    final chars = ble.characteristics;
+    chars.forEachIndexed((index, char) {
+      ble.readDescriptor(char).then((value) {
+        _map[index] = value.join(" <> ");
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
