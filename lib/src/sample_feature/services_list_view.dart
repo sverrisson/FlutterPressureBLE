@@ -35,7 +35,7 @@ class ServicesListView extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           final service = services[index];
           return ListTile(
-            title: Text('Service: ${service.uuid}'),
+            title: Text('Service: ${service.uuid.toString().substring(4, 8)}'),
             leading: const Icon(
               Icons.bluetooth_connected,
               size: 36,

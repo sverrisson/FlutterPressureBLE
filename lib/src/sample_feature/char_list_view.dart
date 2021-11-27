@@ -54,7 +54,7 @@ class _CharListViewState extends State<CharListView> {
         itemBuilder: (BuildContext context, int index) {
           final char = widget.chars[index];
           return ListTile(
-            title: Text('Char: ${char.uuid.toString().substring(6, 8)}'),
+            title: Text('Char: ${char.uuid.toString().substring(4, 8)}'),
             subtitle: Text(_map[index] ??
                 Provider.of<BleStateModel>(context, listen: false)
                     .readProperties(char)),

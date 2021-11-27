@@ -115,7 +115,7 @@ class BleStateModel extends ChangeNotifier {
       return [];
     }
     if (char.descriptors.isEmpty) {
-      assert(char.descriptors.isNotEmpty, "☢️ Data: char has no descriptor");
+      log.warning("☢️ Data: char has no descriptor");
       return [];
     }
     final desc = char.descriptors;
