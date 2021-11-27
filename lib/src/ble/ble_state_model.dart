@@ -32,6 +32,7 @@ class BleStateModel extends ChangeNotifier {
   List<BluetoothService> get services => _services;
   List<BluetoothCharacteristic> get characteristics => _chars;
 
+  /// Read data from a characteristic
   Stream<String> readData(BluetoothCharacteristic? char) {
     if (char == null) return const Stream<String>.empty();
     if (status != BleStatus.connected) {
@@ -49,10 +50,12 @@ class BleStateModel extends ChangeNotifier {
     });
   }
 
+  /// Write an int to a characteristic
   Future<void> writeInt(BluetoothCharacteristic? char, int value) async {
     return writeData(char, [value]);
   }
 
+  /// Write to a characteristic
   Future<void> writeData(
       BluetoothCharacteristic? char, List<int> buffer) async {
     if (char == null) return;
@@ -69,6 +72,7 @@ class BleStateModel extends ChangeNotifier {
     return;
   }
 
+  /// Listen to a notify characteristic
   Future<Stream<List<int>>> notifyStream(BluetoothCharacteristic? char) async {
     if (char == null) return const Stream.empty();
     if (status != BleStatus.connected) {
@@ -91,6 +95,28 @@ class BleStateModel extends ChangeNotifier {
     // }, onError: (error) {
     //   // log.error("☢️ Notify Error: $error");
     // });
+  }
+
+  /// Read a descriptor for a characteristic
+  Future<List<String>> readDescriptor(BluetoothCharacteristic? char) async {
+    if (char == null) return [];
+    if (status != BleStatus.connected) {
+      assert(status == BleStatus.connected, "A device is NOT connected");
+      return [];
+    }
+    if (char.descriptors.isEmpty) {
+      assert(char.descriptors.isNotEmpty, "☢️ Data: char has no descriptor");
+      return [];
+    }
+    final desc = char.descriptors;
+    List<String> descriptors = [];
+    for (var des in desc) {
+      final values = await des.read();
+      String string = utf8.decode(values, allowMalformed: true);
+      descriptors.add(string);
+      log.info("☢️ Descriptor: $string");
+    }
+    return descriptors;
   }
 
   /// Connect to the device
