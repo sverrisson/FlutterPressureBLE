@@ -22,7 +22,7 @@ class _CharListViewState extends State<CharListView> {
   @override
   Widget build(BuildContext context) {
     BluetoothDevice? device =
-        Provider.of<BleStateModel>(context, listen: false).selected?.device;
+        Provider.of<BleStateModel>(context, listen: false).device;
     return Scaffold(
       appBar: AppBar(
         title: Text('${device?.name}'),
@@ -42,7 +42,9 @@ class _CharListViewState extends State<CharListView> {
           final char = widget.chars[index];
           return ListTile(
             title: Text('Char: ${char.uuid.toString().substring(6, 8)}'),
-            subtitle: Text(_map[index] ?? ''),
+            subtitle: Text(_map[index] ??
+                Provider.of<BleStateModel>(context, listen: false)
+                    .readProperties(char)),
             leading: const Icon(
               Icons.bluetooth_connected,
               size: 36,

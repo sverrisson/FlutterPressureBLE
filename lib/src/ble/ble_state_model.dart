@@ -97,6 +97,16 @@ class BleStateModel extends ChangeNotifier {
     // });
   }
 
+  /// Read properties for a characteristic
+  String readProperties(BluetoothCharacteristic? char) {
+    if (char == null) return '';
+    if (status != BleStatus.connected) {
+      assert(status == BleStatus.connected, "A device is NOT connected");
+      return '';
+    }
+    return char.properties.toString();
+  }
+
   /// Read a descriptor for a characteristic
   Future<List<String>> readDescriptor(BluetoothCharacteristic? char) async {
     if (char == null) return [];
